@@ -35,9 +35,6 @@ EXPOSE 443
 # Expose Aphlict (notification server) on 22280
 EXPOSE 22280
 
-# Expose SSH port 24 (Git SSH will be on 22, regular SSH on 24)
-EXPOSE 24
-
 # Helper scripts around running & upgrading phabricator
 ADD configure-instance.sh /srv/phabricator/
 ADD upgrade-phabricator.sh /srv/phabricator/
