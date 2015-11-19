@@ -7,9 +7,10 @@ MAINTAINER elarasu@outlook.com
 # Install requirements
 RUN  apt-get update  \
   && apt-get upgrade -y \
-  && apt-get install -yq ssh cron git sendmail nodejs-legacy npm python-pygments \
-       nginx php5 php5-fpm php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php-apc php5-cli php5-json php5-ldap python-Pygments nodejs sudo --no-install-recommends \
+  && apt-get install -yq ssh cron git sendmail fetchmail nodejs-legacy npm python-pygments \
+       nginx php5 php5-fpm php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php-apc php5-cli php5-json php5-ldap php5-imap php-pear python-Pygments nodejs sudo --no-install-recommends \
   && npm install ws \
+  && pecl install mailparse \
   && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 # Add users
@@ -49,6 +50,9 @@ ADD php.ini /etc/php5/fpm/
 
 # Add necessary git entries entries
 RUN echo "git ALL=(phab-daemon) SETENV: NOPASSWD: /usr/bin/git-upload-pack, /usr/bin/git-receive-pack" > /etc/sudoers.d/git
+
+# Add mailparse to php
+RUN echo "extension=mailparse.so" > /etc/php5/cli/conf.d/30-mailparse.ini
 
 # Add Supervisord config files
 ADD cron.sv.conf /etc/supervisor/conf.d/
