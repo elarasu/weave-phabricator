@@ -8,6 +8,7 @@ MAINTAINER elarasu@outlook.com
 RUN  apt-get update  \
   && apt-get upgrade -y \
   && apt-get install -yq ssh cron git sendmail fetchmail nodejs-legacy npm python-pygments \
+       build-essential g++ \
        nginx php5 php5-fpm php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php-apc php5-cli php5-json php5-ldap php5-imap php-pear python-Pygments nodejs sudo --no-install-recommends \
   && npm install ws \
   && pecl install mailparse \
